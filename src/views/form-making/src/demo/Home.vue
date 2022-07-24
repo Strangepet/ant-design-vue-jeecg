@@ -1,0 +1,20 @@
+<template>
+  <fm-making-form 
+  ref="makingForm" 
+  style="height:600px"
+  upload 
+  preview
+  generate-code 
+  generate-json 
+  clearable>
+    <template slot="action">
+    </template>
+  </fm-making-form>
+</template>
+
+<script>
+export default {
+  mounted () {
+  }
+}
+</script>

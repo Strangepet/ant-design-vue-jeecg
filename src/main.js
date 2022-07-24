@@ -7,11 +7,16 @@ import Storage from 'vue-ls'
 import router from './router'
 import store from './store/'
 import { VueAxios } from "@/utils/request"
-import FormMaking from 'form-making'
+// import FormMaking from 'form-making'
+import FormMaking from './views/form-making/src'
+// import {
+//   GenerateForm,
+//   MakingForm
+// } from 'form-making'
 import {
-  GenerateForm,
-  MakingForm
-} from 'form-making'
+    GenerateForm,
+    MakingForm
+  } from './views/form-making/src'
 import ElementUI from 'element-ui'
 
 import 'form-making/dist/FormMaking.css'
