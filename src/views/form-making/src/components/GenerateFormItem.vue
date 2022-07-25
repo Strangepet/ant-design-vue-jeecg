@@ -1,5 +1,12 @@
 <template>
   <el-form-item :label="widget.name" :prop="widget.model">
+
+    <template v-if="widget.type == 'input'">  
+      <div :style="{width: isTable ? '100%' : widget.options.width}">
+        <el-button v-model="dataModel"></el-button>
+      </div>
+    </template>
+
     <template v-if="widget.type == 'input'" >
       <el-input
         v-if="widget.options.dataType == 'number' || widget.options.dataType == 'integer' || widget.options.dataType == 'float'"

@@ -227,9 +227,18 @@ export const basicComponents = [
       defaultValue: 'This is a text',
       customClass: '',
     }
+  },
+  {
+    type: 'button', // 组件类型，保持唯一
+    name: '按钮', //组件展示名称
+    icon: 'icon-zidingyishuju', //组件展示icon, 如果需要自定义，请参考 如何自定义图标
+    options: { // 组件配置信息，根据自定义组件自己添加配置
+      defaultValue: '', // 该值表示组件的默认值
+      // 根据自己的组件自定义添加配置参数
+    }
   }
 ]
-
+// 高级组件
 export const advanceComponents = [
   {
     type: 'blank',

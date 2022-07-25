@@ -192,6 +192,12 @@
           <span>{{element.options.defaultValue}}</span>
         </template>
 
+        <template v-if="element.type == 'button'">
+          <el-button
+            v-model="element.options.defaultValue"
+          ></el-button>
+        </template>
+
         <div class="widget-view-action" v-if="selectWidget.key == element.key">
           <i class="iconfont icon-icon_clone" @click.stop="handleWidgetClone(index)"></i>
           <i class="iconfont icon-trash" @click.stop="handleWidgetDelete(index)"></i>
