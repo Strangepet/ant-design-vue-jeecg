@@ -83,12 +83,15 @@
           
           <el-aside class="widget-config-container">
             <el-container>
+              <!-- 右侧字段属性和表单属性tab栏 -->
               <el-header height="45px">
                 <div class="config-tab" :class="{active: configTab=='widget'}" @click="handleConfigSelect('widget')">{{$t('fm.config.widget.title')}}</div>
                 <div class="config-tab" :class="{active: configTab=='form'}" @click="handleConfigSelect('form')">{{$t('fm.config.form.title')}}</div>
               </el-header>
               <el-main class="config-content">
+                <!-- 右侧字段属性具体内容 -->
                 <widget-config v-show="configTab=='widget'" :data="widgetFormSelect"></widget-config>
+                <!-- 右侧表单属性具体内容 -->
                 <form-config v-show="configTab=='form'" :data="widgetForm.config"></form-config>
               </el-main>
             </el-container>

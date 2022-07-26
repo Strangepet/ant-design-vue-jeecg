@@ -1,12 +1,15 @@
 <template>
   <div v-if="show">
     <el-form label-position="top">
+      <!-- 字段：字段标识 -->
       <el-form-item :label="$t('fm.config.widget.model')" v-if="data.type!='grid'">
         <el-input v-model="data.model"></el-input>
       </el-form-item>
+      <!-- 字段：标题 -->
       <el-form-item :label="$t('fm.config.widget.name')" v-if="data.type!='grid'">
         <el-input v-model="data.name"></el-input>
       </el-form-item>
+      <!-- 字段：宽度 -->
       <el-form-item :label="$t('fm.config.widget.width')" v-if="Object.keys(data.options).indexOf('width')>=0">
         <el-input v-model="data.options.width"></el-input>
       </el-form-item>
