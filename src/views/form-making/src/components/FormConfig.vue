@@ -20,12 +20,22 @@
           <el-radio-button label="mini">mini</el-radio-button>
         </el-radio-group>
       </el-form-item>
+
+      <el-form-item :label="$t('fm.config.form.customJs')">
+        <el-button @click="emitJs">设置</el-button>
+      </el-form-item>
+        
     </el-form>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['data']
+  props: ['data'],
+  methods: {
+    emitJs () {
+      this.$emit('handleJs')
+    }
+  }
 }
 </script>

@@ -5,6 +5,7 @@
         <el-container>
           <el-aside width="250px">
             <div class="components-list">
+              <!-- 基础组件 -->
               <template v-if="basicFields.length">
                 <div class="widget-cate">{{$t('fm.components.basic.title')}}</div>
                 <draggable tag="ul" :list="basicComponents" 
@@ -22,7 +23,9 @@
                     </li>
                   </template>                
                 </draggable>
-              </template>            
+              </template>  
+              
+              <!-- 高级组件 -->
               <template v-if="advanceFields.length">
                 <div class="widget-cate">{{$t('fm.components.advance.title')}}</div>
                 <draggable tag="ul" :list="advanceComponents" 
@@ -42,7 +45,7 @@
                 </draggable>
               </template>
 
-              
+              <!-- 布局组件 -->
               <template v-if="layoutFields.length">
                 <div class="widget-cate">{{$t('fm.components.layout.title')}}</div>
                 <draggable tag="ul" :list="layoutComponents" 
@@ -65,6 +68,7 @@
             </div>
             
           </el-aside>
+          <!-- 中间画布 -->
           <el-container class="center-container" direction="vertical">
             <el-header class="btn-bar" style="height: 45px;">
               <slot name="action">
@@ -75,12 +79,12 @@
               <el-button v-if="generateJson" type="text" size="medium" icon="el-icon-tickets" @click="handleGenerateJson">{{$t('fm.actions.json')}}</el-button>
               <el-button v-if="generateCode" type="text" size="medium" icon="el-icon-document" @click="handleGenerateCode">{{$t('fm.actions.code')}}</el-button>
             </el-header>
+            <!-- 展示区域 -->
             <el-main :class="{'widget-empty': widgetForm.list.length == 0}">
-              
               <widget-form v-if="!resetJson"  ref="widgetForm" :data="widgetForm" :select.sync="widgetFormSelect"></widget-form>
             </el-main>
           </el-container>
-          
+          <!-- 属性设置 -->
           <el-aside class="widget-config-container">
             <el-container>
               <el-header height="45px">
@@ -88,12 +92,29 @@
                 <div class="config-tab" :class="{active: configTab=='form'}" @click="handleConfigSelect('form')">{{$t('fm.config.form.title')}}</div>
               </el-header>
               <el-main class="config-content">
+                <!-- 字段属性 -->
                 <widget-config v-show="configTab=='widget'" :data="widgetFormSelect"></widget-config>
-                <form-config v-show="configTab=='form'" :data="widgetForm.config"></form-config>
+                <!-- 表单属性 -->
+                <form-config v-show="configTab=='form'" :data="widgetForm.config" @handleJs="handleJs"></form-config>
               </el-main>
             </el-container>
             
           </el-aside>
+          <!-- 动作设置面板 -->
+          <cus-dialog
+            :visible="jsVisible"
+            @on-close="jsVisible = false"
+            ref="handleJs"
+            width="800px"
+            form
+          >
+            <pre id="codeEditor" class="ace_editor" style="min-height:320px" >
+              <s:textarea class="ace_text-input"   cssStyle="width:97.5%;height:320px;" v-model="jsSrc"/>
+            </pre>
+
+            <el-button @click="saveJs">保存</el-button>
+            <el-button>取消</el-button>
+          </cus-dialog>
 
           <cus-dialog
             :visible="previewVisible"
@@ -192,6 +213,11 @@ export default {
     GenerateForm
   },
   props: {
+    // 动作设置面板
+    jsVisible: {
+      type: Boolean,
+      default: false
+    },
     preview: {
       type: Boolean,
       default: false
@@ -283,6 +309,7 @@ export default {
   }
 }`,
       codeActiveName: 'vue',
+      jsSrc: '',
     }
   },
   mounted () {
@@ -399,6 +426,46 @@ export default {
 
       this.widgetFormSelect = {}
     },
+
+    handleJs () {
+      console.log('handlejs')
+      this.jsVisible = !this.jsVisible
+    },
+    //初始化代码编辑器
+    initEditor () {
+      setTimeout(function () {
+        //获取控件   id ：codeEditor
+      let editor = ace.edit("codeEditor");
+      //设置风格和语言（更多风格和语言，请到github上相应目录查看）
+      let theme = "monokai";
+      //theme = "terminal";
+      //语言
+      let language = "javascript";
+      editor.setTheme("ace/theme/" + theme);
+      editor.session.setMode("ace/mode/" + language);
+      //字体大小
+      editor.setFontSize(15);
+      //设置只读（true时只读，用于展示代码）
+      editor.setReadOnly(false);
+      //自动换行,设置为off关闭
+      editor.setOption("wrap", "free");
+      //启用提示菜单
+      ace.require("ace/ext/language_tools");
+      editor.setOptions({
+        enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: true
+      });
+      }, 0)
+      
+	  },
+
+    saveJs () {
+      let editor = ace.edit("codeEditor")
+      this.jsSrc = editor.getValue()
+  
+    },
+
     clear () {
       this.handleClear()
     },
@@ -432,7 +499,12 @@ export default {
     },
     '$i18n.locale': function (val) {
       this._loadComponents()
+    },
+    jsVisible: function () {
+      this.initEditor()
     }
+      
+    
   }
 }
 </script>

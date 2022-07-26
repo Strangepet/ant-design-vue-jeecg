@@ -74,7 +74,8 @@ export default {
         },
         labelWidth: '表单标签宽度',
         size: '组件尺寸',
-        customClass: '自定义Class'
+        customClass: '自定义Class',
+        customJs: '动作面板'
       },
       widget: {
         title: '字段属性',
