@@ -95,7 +95,7 @@
                 <!-- 字段属性 -->
                 <widget-config v-show="configTab=='widget'" :data="widgetFormSelect"></widget-config>
                 <!-- 表单属性 -->
-                <form-config v-show="configTab=='form'" :data="widgetForm.config" @handleJs="handleJs"></form-config>
+                <form-config v-show="configTab=='form'" :data="widgetForm.config" @handleJs="jsVisible = !jsVisible"></form-config>
               </el-main>
             </el-container>
             
@@ -108,14 +108,15 @@
             width="800px"
             form
           >
+            <el-input v-model="jsName" :placeholder="'func name'"></el-input>
             <pre id="codeEditor" class="ace_editor" style="min-height:320px" >
-              <s:textarea class="ace_text-input"   cssStyle="width:97.5%;height:320px;" v-model="jsSrc"/>
+              <s:textarea class="ace_text-input"   cssStyle="width:50%;height:320px;" v-model="jsSrc"/>
             </pre>
 
             <el-button @click="saveJs">保存</el-button>
-            <el-button>取消</el-button>
           </cus-dialog>
 
+          <!-- 预览面板 -->
           <cus-dialog
             :visible="previewVisible"
             @on-close="previewVisible = false"
@@ -125,6 +126,7 @@
           >
             <generate-form insite="true" @on-change="handleDataChange" v-if="previewVisible" :data="widgetForm" :value="widgetModels" :remote="remoteFuncs" ref="generateForm">
 
+              <!-- 作用域插槽, 此处无用 -->
               <template v-slot:blank="scope">
                 Width <el-input v-model="scope.model.blank.width" style="width: 100px"></el-input>
                 Height <el-input v-model="scope.model.blank.height" style="width: 100px"></el-input>
@@ -213,11 +215,6 @@ export default {
     GenerateForm
   },
   props: {
-    // 动作设置面板
-    jsVisible: {
-      type: Boolean,
-      default: false
-    },
     preview: {
       type: Boolean,
       default: false
@@ -232,11 +229,11 @@ export default {
     },
     upload: {
       type: Boolean, 
-      default: false
+      default: true
     },
     clearable: {
       type: Boolean,
-      default: false
+      default: true
     },
     basicFields: {
       type: Array,
@@ -283,6 +280,7 @@ export default {
             resolve(options)
           }, 2000)
         },
+        // 数据源配置
         funcGetToken (resolve) {
           request.get('http://tools-server.making.link/api/uptoken').then(res => {
             resolve(res.uptoken)
@@ -310,6 +308,8 @@ export default {
 }`,
       codeActiveName: 'vue',
       jsSrc: '',
+      jsName: '',
+      jsVisible: false
     }
   },
   mounted () {
@@ -427,10 +427,6 @@ export default {
       this.widgetFormSelect = {}
     },
 
-    handleJs () {
-      console.log('handlejs')
-      this.jsVisible = !this.jsVisible
-    },
     //初始化代码编辑器
     initEditor () {
       setTimeout(function () {
@@ -463,7 +459,7 @@ export default {
     saveJs () {
       let editor = ace.edit("codeEditor")
       this.jsSrc = editor.getValue()
-  
+      console.log(this.jsSrc)
     },
 
     clear () {

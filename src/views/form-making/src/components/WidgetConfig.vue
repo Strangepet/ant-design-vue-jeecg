@@ -342,6 +342,13 @@
           </div>
         </el-form-item>
       </template>
+      <!-- 字段动作属性 -->
+      <el-form-item :label="$t('fm.config.widget.editJs')" v-if="data.type!='grid'">
+        <el-select size="mini" >
+            <el-option value="click" :label="$t('fm.config.widget.click')"></el-option>
+            <el-option value="alert" :label="$t('fm.config.widget.alert')"></el-option>
+        </el-select>
+      </el-form-item>
     </el-form>
   </div>
 </template>

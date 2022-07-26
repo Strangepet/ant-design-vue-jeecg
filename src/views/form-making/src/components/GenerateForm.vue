@@ -6,6 +6,7 @@
       :model="models" :rules="rules" :label-position="data.config.labelPosition" :label-width="data.config.labelWidth + 'px'">
       <template v-for="item in data.list">
 
+        <!-- grid组件 -->
         <template v-if="item.type == 'grid'">
           <el-row
             :key="item.key"
@@ -40,6 +41,7 @@
           </el-form-item>
         </template>
 
+        <!-- 组件的type不是grid也不是blank -->
         <template v-else>
           <genetate-form-item 
             :key="item.key" 

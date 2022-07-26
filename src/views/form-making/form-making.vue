@@ -9,8 +9,7 @@
   >
     <template slot="action">
         <!-- 头部内容自定义，添加提交按钮 -->
-        <el-button type="primary" @click="handleSubmit">提交</el-button>
-        <el-button>测试</el-button>
+        
     </template>
   </fm-making-form>
 </template>

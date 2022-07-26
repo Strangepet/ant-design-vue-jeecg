@@ -178,6 +178,9 @@ export default {
         validatorPattern: '格式不匹配',
         showWordLimit: '显示字数统计',
         maxlength: '最大字数',
+        editJs: '动作',
+        click: '点击',
+        alert: '警告'
       }
     },
     upload: {
