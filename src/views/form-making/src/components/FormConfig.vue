@@ -97,49 +97,48 @@ export default {
         console.log('已设置的样式为',this.cssTextarea)
         // 解析用户填写的样式
         if(this.cssTextarea){
-          let ClassNameArr=[]
-          let ClassContainArr=[]
-          let ClassNameIndexArr=[]
-          let ClassContainIndexArr=[]
+          let classNameArr=[]//类名数组
+          let classContainArr=[]//类内容数组
+          let classNameIndexArr=[]//类名索引数组
+          let classContainIndexArr=[]//类内容索引数组
+          let classIndexArr=[]//完整类索引数组
           let str=this.cssTextarea
           for(let i=0;i<str.length;i++){
             if(str[i]==='.'){
-              // ClassNameLeft=i+1
-              ClassNameIndexArr.push(i)
+              classNameIndexArr.push(i)
+              classIndexArr.push(i)
             }
             if(str[i]==='{'){
-              // ClassNameLeft=i-1
-              ClassNameIndexArr.push(i)
-              ClassContainIndexArr.push(i)
+              classNameIndexArr.push(i)
+              classContainIndexArr.push(i)
+              classIndexArr.push(i)
             }
             if(str[i]==='}'){
-              ClassContainIndexArr.push(i)
+              classContainIndexArr.push(i)
+              classIndexArr.push(i)
             }
           }
-          console.log('类名索引数组',ClassNameIndexArr)
-          console.log('类内容索引数组',ClassContainIndexArr)
-
-          for(let i=0;i< ClassNameIndexArr.length;i++){
-            ClassNameArr.push(str.substring(ClassNameIndexArr[i]+1,ClassNameIndexArr[i+1]))
+          console.log('类名索引数组',classNameIndexArr)
+          console.log('类内容索引数组',classContainIndexArr)
+          for(let i=0;i< classNameIndexArr.length;i++){
+            classNameArr.push(str.substring(classNameIndexArr[i]+1,classNameIndexArr[i+1]))
             i=i+1
           }
-          for(let i=0;i< ClassContainIndexArr.length;i++){
-            ClassContainArr.push(str.substring(ClassContainIndexArr[i]+1,ClassContainIndexArr[i+1]))
+          for(let i=0;i< classContainIndexArr.length;i++){
+            classContainArr.push(str.substring(classContainIndexArr[i]+1,classContainIndexArr[i+1]))
             i=i+1
           }
-          console.log('类名数组',ClassNameArr,'类内容',ClassContainArr)
+          console.log('类名数组',classNameArr,'类内容',classContainArr)
           // 把类名填到下拉框
           this.classOptions=[]
-          for(let i in ClassNameArr){
-            this.classOptions.push({value:ClassNameArr[i]})
+          for(let i=0,j=0;i< classNameArr.length,j<classContainArr.length;i++,j++){
+            let tempClassObj={}
+            tempClassObj['value']=classNameArr[i]
+            tempClassObj['cssContaint']=classContainArr[j]
+            this.classOptions.push(tempClassObj)
           }
-          // for(let i in ClassContainArr){
-          //   this.classOptions.push({cssContaint:ClassContainArr[i]})
-          // }
           console.log('选项有',this.classOptions)
         }
-
-
         this.dialogVisible = false
       }
     }
