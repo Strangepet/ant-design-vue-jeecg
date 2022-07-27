@@ -22,7 +22,7 @@
               formName:'',
               globalConfig: {
                 // 可以将表单预设的样式放入到设计器中
-                styleSheets: '.a .el-form-item__label{color: red;}'
+                styleSheets: ''
               },
             }
         },

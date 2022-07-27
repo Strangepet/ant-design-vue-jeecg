@@ -28,15 +28,20 @@
         <el-dialog
           title="请在此处填写css样式"
           :visible.sync="dialogVisible"
-          width="40%"
+          width="70%"
           :before-close="handleClose">
           <!-- 对话框内容 -->
-          <el-input
-            type="textarea"
-            :autosize="{ minRows: 6, maxRows: 15}"
-            placeholder="请输入内容"
-            v-model="cssTextarea">
-          </el-input>
+          <!-- 代码编辑框 -->
+          <template>
+            <div>
+              <j-code-editor
+                language="css"
+                v-model="cssTextarea"
+                :fullScreen="true"
+                style="min-height: 100px"/>
+              <!-- {{ editorValue }} -->
+            </div>
+          </template>
           
           <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">取 消</el-button>
@@ -63,7 +68,9 @@
 
 <script>
 import bus from './eventBus'
+import JCodeEditor from '@/components/jeecg/JCodeEditor'
 export default {
+  components: {JCodeEditor},
   props: ['data'],
   data(){
     return{
