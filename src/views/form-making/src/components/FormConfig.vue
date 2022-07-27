@@ -46,17 +46,15 @@
       </el-form-item>
 
       <el-form-item :label="'自定义class'" >
-          <el-select v-model="value" multiple placeholder="请选择" style="width:100%">
+          <el-select v-model="cssSelectValue" multiple placeholder="请选择" style="width:100%">
             <el-option
               v-for="item in classOptions"
-              :key="item.value"
+              :key="item.cssClassName"
               :label="item.label"
-              :value="item.value">
+              :value="item.cssClassName">
             </el-option>
           </el-select>
       </el-form-item>
-      
-
     </el-form>
 
 
@@ -69,20 +67,20 @@ export default {
   data(){
     return{
       dialogVisible: false,
-      // cssTextarea:'.testcss1{color:red;backgroundcolor:pink} .testcss2{color:yellow}',
-      cssTextarea:'.a{34} .b{1012}',
+      cssTextarea:'.testcss1{color:red;backgroundcolor:pink} .testcss2{color:yellow}',
+      // cssTextarea:'.a{34} .b{1012}',
       classOptions: [
         // {
-        //   value: '选项1',
+        //   cssClassName: '选项1',
         //   // label: '黄金糕'
         //   cssContaint:'color:red'
         // }, {
-        //   value: '选项2',
+        //   cssClassName: '选项2',
         //   // label: '双皮奶'
         //   cssContaint:'color:yellow'
         // }
         ],
-        value: '选项1'
+        cssSelectValue: []
     }
   },
    methods: {
@@ -133,13 +131,14 @@ export default {
           this.classOptions=[]
           for(let i=0,j=0;i< classNameArr.length,j<classContainArr.length;i++,j++){
             let tempClassObj={}
-            tempClassObj['value']=classNameArr[i]
+            tempClassObj['cssClassName']=classNameArr[i]
             tempClassObj['cssContaint']=classContainArr[j]
             this.classOptions.push(tempClassObj)
           }
           console.log('选项有',this.classOptions)
         }
         this.dialogVisible = false
+        
       }
     }
 }
