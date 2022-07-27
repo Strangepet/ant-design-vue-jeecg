@@ -46,12 +46,12 @@
       </el-form-item>
 
       <el-form-item :label="'自定义class'" >
-          <el-select v-model="cssSelectValue" multiple placeholder="请选择" style="width:100%">
+          <el-select v-model="cssSelectValue" multiple placeholder="请选择" style="width:100%" @change="transCss">
             <el-option
               v-for="item in classOptions"
               :key="item.cssClassName"
-              :label="item.label"
-              :value="item.cssClassName">
+              :label="item.cssClassName"
+              :value="item.cssContaint">
             </el-option>
           </el-select>
       </el-form-item>
@@ -62,6 +62,7 @@
 </template>
 
 <script>
+import bus from './eventBus'
 export default {
   props: ['data'],
   data(){
@@ -69,13 +70,7 @@ export default {
       dialogVisible: false,
       //用户输入的代码文本
       cssTextarea:'.testcss1{color:red;backgroundcolor:pink} .testcss2{color:yellow}',
-      classOptions: [
-        // {
-        //   cssClassName: '选项1',
-        //   // label: '黄金糕'
-        //   cssContaint:'color:red'
-        // }, 
-        ],
+      classOptions: [],
       cssSelectValue: []//被选中的下拉框数组
     }
   },
@@ -133,11 +128,16 @@ export default {
           }
           console.log('选项有',this.classOptions)
         }
-        console.log('-----',this.cssSelectValue)
         //关闭对话框
         this.dialogVisible = false
-        
+      },
+
+      //下拉框选项更改时把数据传输给widgetform组件
+      transCss(){
+      // 把下拉框的cssSelectValue变量通过transCssValue这个自定义事件共享给兄弟组件widgetform
+        bus.$emit('transCssValue',this.cssSelectValue)
       }
+
     }
 }
 </script>
