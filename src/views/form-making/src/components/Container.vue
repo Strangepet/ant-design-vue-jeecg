@@ -76,11 +76,12 @@
               <el-button v-if="generateCode" type="text" size="medium" icon="el-icon-document" @click="handleGenerateCode">{{$t('fm.actions.code')}}</el-button>
             </el-header>
             <el-main :class="{'widget-empty': widgetForm.list.length == 0}">
-              
+              <!-- 中间大框 -->
               <widget-form v-if="!resetJson"  ref="widgetForm" :data="widgetForm" :select.sync="widgetFormSelect"></widget-form>
             </el-main>
           </el-container>
           
+          <!-- 右侧大框 -->
           <el-aside class="widget-config-container">
             <el-container>
               <!-- 右侧字段属性和表单属性tab栏 -->
@@ -89,9 +90,9 @@
                 <div class="config-tab" :class="{active: configTab=='form'}" @click="handleConfigSelect('form')">{{$t('fm.config.form.title')}}</div>
               </el-header>
               <el-main class="config-content">
-                <!-- 右侧字段属性具体内容 -->
+                <!-- 右侧字段属性框 -->
                 <widget-config v-show="configTab=='widget'" :data="widgetFormSelect"></widget-config>
-                <!-- 右侧表单属性具体内容 -->
+                <!-- 右侧表单属性框 -->
                 <form-config v-show="configTab=='form'" :data="widgetForm.config"></form-config>
               </el-main>
             </el-container>

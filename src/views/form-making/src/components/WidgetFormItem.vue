@@ -1,12 +1,13 @@
 <template>
-  <el-form-item class="widget-view "
+<!-- 下面这个大组件是中间的form表单的子组件 -->
+  <el-form-item class="widget-view" 
       v-if="element && element.key"
       :class="{active: selectWidget.key == element.key, 'is_req': element.options.required}"
       :label="element.name"
       @click.native.stop="handleSelectWidget(index)"
     >
-        <template v-if="element.type == 'input'">
-          <el-input
+        <template v-if="element.type == 'input'" >
+          <el-input 
             v-model="element.options.defaultValue"
             :style="{width: element.options.width}"
             :placeholder="element.options.placeholder"

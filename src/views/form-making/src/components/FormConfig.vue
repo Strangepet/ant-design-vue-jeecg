@@ -67,20 +67,16 @@ export default {
   data(){
     return{
       dialogVisible: false,
+      //用户输入的代码文本
       cssTextarea:'.testcss1{color:red;backgroundcolor:pink} .testcss2{color:yellow}',
-      // cssTextarea:'.a{34} .b{1012}',
       classOptions: [
         // {
         //   cssClassName: '选项1',
         //   // label: '黄金糕'
         //   cssContaint:'color:red'
-        // }, {
-        //   cssClassName: '选项2',
-        //   // label: '双皮奶'
-        //   cssContaint:'color:yellow'
-        // }
+        // }, 
         ],
-        cssSelectValue: []
+      cssSelectValue: []//被选中的下拉框数组
     }
   },
    methods: {
@@ -137,6 +133,8 @@ export default {
           }
           console.log('选项有',this.classOptions)
         }
+        console.log('-----',this.cssSelectValue)
+        //关闭对话框
         this.dialogVisible = false
         
       }
