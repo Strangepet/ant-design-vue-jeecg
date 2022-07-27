@@ -11,7 +11,7 @@
         @add="handleWidgetAdd"
       >
 
-        <transition-group name="fade" tag="div" class="widget-form-list">
+        <transition-group name="fade" tag="div" class="widget-form-list" style="background:#fff0">
           <template v-for="(element, index) in data.list">
             <template v-if="element.type == 'grid'">
                 <el-row class="widget-col widget-view" v-if="element && element.key" :key="element.key" 
