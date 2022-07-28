@@ -18,6 +18,18 @@
         <el-input v-model="data.options.height"></el-input>
       </el-form-item>
 
+      <!-- 字段样式class自定义 -->
+      <el-form-item :label="'自定义class'" >
+          <el-select v-model="cssSelectValue" multiple placeholder="请选择" style="width:100%" >
+            <el-option
+              v-for="item in classOptions"
+              :key="item.cssClassName"
+              :label="item.cssClassName"
+              :value="item.cssContaint">
+            </el-option>
+          </el-select>
+      </el-form-item>
+
       <el-form-item :label="$t('fm.config.widget.size')" v-if="Object.keys(data.options).indexOf('size')>=0">
         {{$t('fm.config.widget.width')}} <el-input style="width: 90px;" type="number" v-model.number="data.options.size.width"></el-input>
         {{$t('fm.config.widget.height')}} <el-input style="width: 90px;" type="number" v-model.number="data.options.size.height"></el-input>
@@ -351,6 +363,7 @@
 
 <script>
 import Draggable from 'vuedraggable'
+import bus from './eventBus'
 
 export default {
   components: {
@@ -365,8 +378,17 @@ export default {
         pattern: null,
         range: null,
         length: null
-      }
+      },
+      classOptions:[],//下拉框对应数据
+      cssSelectValue:[],//被选中的css下拉框数组
     }
+  },
+  //接收兄弟组件formconfig传来的数据
+  created(){
+    bus.$on('transClassOptions',val=>{
+      this.classOptions=val
+      console.log('字段设置接收到传来的数据',this.classOptions)
+    })
   },
   computed: {
     show () {

@@ -134,6 +134,8 @@ export default {
             this.classOptions.push(tempClassObj)
           }
           console.log('选项有',this.classOptions)
+          // 把解析后的类名类内容传给字段设置里面的下拉框组件
+          bus.$emit('transClassOptions',this.classOptions)
         }
         //关闭对话框
         this.dialogVisible = false
