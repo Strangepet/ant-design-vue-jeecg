@@ -99,6 +99,7 @@
             
           </el-aside>
 
+          <!-- 整个预览界面 -->
           <cus-dialog
             :visible="previewVisible"
             @on-close="previewVisible = false"

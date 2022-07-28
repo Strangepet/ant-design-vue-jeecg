@@ -1,4 +1,5 @@
 <template>
+<!-- 整个预览界面 -->
   <el-dialog
     class="cus-dialog-container"
     :title="title"
@@ -10,10 +11,11 @@
     ref="elDialog"
     :id="id"
     >
+    <!-- 预览框的表单 -->
     <span v-if="show">
       <slot></slot>
     </span>
-
+    <!-- 预览框下面的按钮 -->
     <span v-if="action" slot="footer" class="dialog-footer" v-loading="loading"
       :element-loading-text="loadingText">
       <slot name="action">
