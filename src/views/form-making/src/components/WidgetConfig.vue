@@ -20,7 +20,8 @@
 
       <!-- 字段样式class自定义 -->
       <el-form-item :label="'自定义class'" >
-          <el-select v-model="cssSelectValue" multiple placeholder="请选择" style="width:100%" >
+        <!-- 被选定的值不是固定的，需要由字段配置下拉框的选定值决定 -->
+          <el-select v-model="data.options.cssSelectValue" multiple placeholder="请选择" style="width:100%" >
             <el-option
               v-for="item in classOptions"
               :key="item.cssClassName"
@@ -380,7 +381,7 @@ export default {
         length: null
       },
       classOptions:[],//下拉框对应数据
-      cssSelectValue:[],//被选中的css下拉框数组
+      // cssSelectValue:[],//被选中的css下拉框数组
     }
   },
   //接收兄弟组件formconfig传来的数据
