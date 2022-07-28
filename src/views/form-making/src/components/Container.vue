@@ -93,9 +93,9 @@
               </el-header>
               <el-main class="config-content">
                 <!-- 字段属性 -->
-                <widget-config v-show="configTab=='widget'" :data="widgetFormSelect"></widget-config>
+                <widget-config v-show="configTab=='widget'" :data="widgetFormSelect" :func="jsName"></widget-config>
                 <!-- 表单属性 -->
-                <form-config v-show="configTab=='form'" :data="widgetForm.config" @handleJs="jsVisible = !jsVisible"></form-config>
+                <form-config v-show="configTab=='form'" :data="widgetForm.config" :func="jsName" @handleJs="jsVisible = !jsVisible"></form-config>
               </el-main>
             </el-container>
             
@@ -261,6 +261,8 @@ export default {
           labelPosition: 'right',
           size: 'small'
         },
+        // 给组件添加事件
+        func: 'func'
       },
       configTab: 'widget',
       widgetFormSelect: null,
@@ -459,7 +461,10 @@ export default {
     saveJs () {
       let editor = ace.edit("codeEditor")
       this.jsSrc = editor.getValue()
-      console.log(this.jsSrc)
+      localStorage.setItem(this.jsName, this.jsSrc)
+      let jsStr = localStorage.getItem(this.jsName)
+      console.log(jsStr)
+      console.log(eval(jsStr + this.jsName + '()'))
     },
 
     clear () {

@@ -23,6 +23,7 @@
 
       <el-form-item :label="$t('fm.config.form.customJs')">
         <el-button @click="emitJs">设置</el-button>
+        <div v-show="func">{{func}}</div>
       </el-form-item>
         
     </el-form>
@@ -31,7 +32,7 @@
 
 <script>
 export default {
-  props: ['data'],
+  props: ['data', 'func'],
   methods: {
     emitJs () {
       this.$emit('handleJs')

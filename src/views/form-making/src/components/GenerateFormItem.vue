@@ -28,6 +28,7 @@
       ></el-input>
     </template>
 
+    <!-- 绑定点击事件 -->
     <template v-if="widget.type == 'textarea'">
       <el-input type="textarea" :rows="5"
         v-model="dataModel"
@@ -36,6 +37,7 @@
         :style="{width: widget.options.width}"
         :maxlength="widget.options.maxlength"
         :show-word-limit="widget.options.showWordLimit"
+        @click.native="handleClick"
       ></el-input>
     </template>
 
@@ -220,7 +222,7 @@
 import FmUpload from './Upload'
 
 export default {
-  props: ['widget', 'models', 'rules', 'remote'],
+  props: ['widget', 'models', 'rules', 'remote', 'func'],
   components: {
     FmUpload
   },
@@ -250,6 +252,14 @@ export default {
     }
   },
   methods: {
+    handleClick () {
+      if (this.func) {
+        let exacutor = localStorage.getItem(this.func)
+        console.log(eval(exacutor + this.func + '()'))
+      } else {
+        
+      }
+    }
   },
   watch: {
     dataModel: {

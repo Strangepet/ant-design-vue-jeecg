@@ -49,7 +49,8 @@
             :rules="rules" 
             :widget="item" 
             @input-change="onInputChange"
-            :remote="remote">
+            :remote="remote"
+            :func = "''">
           </genetate-form-item>
         </template>
         

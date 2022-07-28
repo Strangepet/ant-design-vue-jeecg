@@ -360,7 +360,7 @@ export default {
   components: {
     Draggable
   },
-  props: ['data'],
+  props: ['data', 'func'],
   data () {
     return {
       validator: {
