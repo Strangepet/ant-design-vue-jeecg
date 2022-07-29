@@ -88,6 +88,7 @@ export default {
   created(){
     bus.$on('transCssValue',val=>{
       // console.log('表单接收到传来的数据',this.cssArr)
+      this.cssArr=''
       for(let item in val){
         this.cssArr=this.cssArr+';'+val[item]
       }
