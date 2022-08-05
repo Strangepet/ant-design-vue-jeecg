@@ -87,7 +87,7 @@ export default {
   //接收兄弟组件formconfig传来的数据
   created(){
     bus.$on('transCssValue',val=>{
-      // console.log('表单接收到传来的数据',this.cssArr)
+      // console.log('表单接收到传来的数据',val)
       this.cssArr=''
       for(let item in val){
         this.cssArr=this.cssArr+';'+val[item]

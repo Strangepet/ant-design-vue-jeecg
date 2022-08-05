@@ -1,7 +1,6 @@
 <template>
   <div class="fm-style">
-    <!-- 预览框绑定样式class加在这个位置 -->
-    <el-form ref="generateForm" 
+    <el-form ref="generateForm"
       label-suffix=":"
       :size="data.config.size"
       :model="models" :rules="rules" :label-position="data.config.labelPosition" :label-width="data.config.labelWidth + 'px'">
@@ -70,7 +69,7 @@ export default {
   data () {
     return {
       models: {},
-      rules: {}
+      rules: {},
     }
   },
   created () {

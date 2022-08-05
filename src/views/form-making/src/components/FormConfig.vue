@@ -76,7 +76,8 @@ export default {
     return{
       dialogVisible: false,
       //用户输入的代码文本
-      cssTextarea:'.testcss1{color:red;backgroundcolor:pink} .testcss2{color:yellow}',
+      // cssTextarea:'',
+      cssTextarea:'.testcss1{color:red;background:pink} .testcss2{color:yellow}',
       classOptions: [],
       cssSelectValue: []//被选中的下拉框数组
     }
@@ -90,7 +91,7 @@ export default {
           .catch(_ => {});
       },
       setcss(){
-        console.log('已设置的样式为',this.cssTextarea)
+        console.log('已填入的样式为',this.cssTextarea)
         // 解析用户填写的样式
         if(this.cssTextarea){
           let classNameArr=[]//类名数组
@@ -145,6 +146,7 @@ export default {
       transCss(){
       // 把下拉框的cssSelectValue变量通过transCssValue这个自定义事件共享给兄弟组件widgetform
         bus.$emit('transCssValue',this.cssSelectValue)
+        bus.$emit('transCssValue2',this.cssSelectValue)
       }
 
     }

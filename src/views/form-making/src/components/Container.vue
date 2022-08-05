@@ -107,7 +107,7 @@
             width="1000px"
             form
           >
-            <generate-form insite="true" @on-change="handleDataChange" v-if="previewVisible" :data="widgetForm" :value="widgetModels" :remote="remoteFuncs" ref="generateForm">
+            <generate-form :style="cssArr" insite="true" @on-change="handleDataChange" v-if="previewVisible" :data="widgetForm" :value="widgetModels" :remote="remoteFuncs" ref="generateForm">
 
               <template v-slot:blank="scope">
                 Width <el-input v-model="scope.model.blank.width" style="width: 100px"></el-input>
@@ -185,6 +185,7 @@ import {basicComponents, layoutComponents, advanceComponents} from './components
 import {loadJs, loadCss} from '../util/index.js'
 import request from '../util/request.js'
 import generateCode from './generateCode.js'
+import bus from './eventBus'
 
 export default {
   name: 'fm-making-form',
@@ -288,7 +289,17 @@ export default {
   }
 }`,
       codeActiveName: 'vue',
+      cssArr:'',
     }
+  },
+  created(){
+      bus.$on('transCssValue2',val=>{
+        console.log('传来的原始数据',val)
+        this.cssArr=''
+        for(let item in val){
+          this.cssArr=this.cssArr+';'+val[item]
+        }
+    })
   },
   mounted () {
     this._loadComponents()
@@ -330,7 +341,7 @@ export default {
       return true
     },
     handlePreview () {
-      console.log(this.widgetForm)
+      console.log('生成预览效果',this.widgetForm)
       this.previewVisible = true
     },
     handleTest () {
