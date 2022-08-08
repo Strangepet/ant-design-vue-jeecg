@@ -6,7 +6,7 @@
       :label="element.name"
       @click.native.stop="handleSelectWidget(index)"
     >
-        <template v-if="element.type == 'input'" >
+        <template v-if="element.type == 'input'">
           <el-input 
             v-model="element.options.defaultValue"
             :style="{width: element.options.width}"
@@ -190,7 +190,7 @@
         </template>
 
         <template v-if="element.type == 'text'">
-          <span>{{element.options.defaultValue}}</span>
+          <span :style="widgetcssSelectValue">{{element.options.defaultValue}}</span>
         </template>
 
         <div class="widget-view-action" v-if="selectWidget.key == element.key">
@@ -207,6 +207,7 @@
 
 <script>
 import FmUpload from './Upload'
+import bus from './eventBus'
 export default {
   props: ['element', 'select', 'index', 'data'],
   components: {
@@ -214,8 +215,19 @@ export default {
   },
   data () {
     return {
-      selectWidget: this.select
+      selectWidget: this.select,
+      widgetcssSelectValue:'',//文本组件的样式变量
     }
+  },
+  created(){
+    bus.$on('transWidgetCssValue',val=>{
+      this.widgetcssSelectValue=''
+      for(let item in val){
+        this.widgetcssSelectValue=this.widgetcssSelectValue+';'+val[item]
+      }
+      console.log('字段接收到的val',val)
+      console.log('字段关联的样式',this.widgetcssSelectValue)
+    })
   },
   mounted () {
 

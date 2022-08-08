@@ -77,7 +77,7 @@ export default {
       dialogVisible: false,
       //用户输入的代码文本
       // cssTextarea:'',
-      cssTextarea:'.testcss1{color:red;background:pink} .testcss2{color:yellow}',
+      cssTextarea:'.testcss1{color:red;background:pink} .testcss2{color:yellow}.blue{color:blue}.orange{color:orange}',
       classOptions: [],
       cssSelectValue: []//被选中的下拉框数组
     }
