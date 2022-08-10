@@ -21,7 +21,7 @@
       <!-- 字段样式class自定义 -->
       <el-form-item :label="'自定义class'" >
         <!-- 被选定的值不是固定的，需要由字段配置下拉框的选定值决定 -->
-          <el-select v-model="data.cssSelectValue1" multiple placeholder="请选择" style="width:100%" @change="transWidgetCss">
+          <el-select v-model="data.cssSelectValue1" multiple placeholder="请选择" style="width:100%" >
             <el-option
               v-for="item in classOptions"
               :key="item.cssClassName"
@@ -400,10 +400,6 @@ export default {
     }
   },
   methods: {
-    transWidgetCss(){
-      bus.$emit('transWidgetCssValue',this.data.cssSelectValue1)
-      console.log('字段class发生改变，开始传递',this.data.cssSelectValue1)
-    },
     handleOptionsRemove (index) {
       if (this.data.type === 'grid') {
         this.data.columns.splice(index, 1)
@@ -522,7 +518,8 @@ export default {
         this.validateDataType(this.data.options.dataType)
         this.valiatePattern(this.data.options.pattern)
       }
-      // console.log('data.name发生改变',this.data)
+      //data的内容：cssSelectValue1、icon,key,model,name,options,rules,type
+      console.log('data.name发生改变',this.data)
     }
   }
 }

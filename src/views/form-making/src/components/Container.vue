@@ -238,6 +238,7 @@ export default {
       advanceComponents,
       resetJson: false,
       widgetForm: {
+        //list数组包含中间表单内的所有组件对象，每个组件对象包含icon，key，model，name，options，controlsPosition，defaultValue等属性
         list: [],
         config: {
           labelWidth: 100,
@@ -358,7 +359,7 @@ export default {
     handleGenerateJson () {
       this.jsonVisible = true
       this.jsonTemplate = this.widgetForm
-      console.log(JSON.stringify(this.widgetForm))
+      console.log('widgetForm转化为JSON',JSON.stringify(this.widgetForm))
       this.$nextTick(() => {
 
         const editor = ace.edit('jsoneditor')
@@ -412,7 +413,7 @@ export default {
           customClass: ''
         },
       }
-
+      console.log('即将清空的某个字段配置数据为：',this.widgetFormSelect)
       this.widgetFormSelect = {}
     },
     clear () {
@@ -424,9 +425,10 @@ export default {
     getHtml () {
       return generateCode(JSON.stringify(this.widgetForm))
     },
+    //这个函数是导入Json数据
     setJSON (json) {
       this.widgetForm = json
-
+      console.log('看看setJson何时执行')
       if (json.list.length> 0) {
         this.widgetFormSelect = json.list[0]
       }

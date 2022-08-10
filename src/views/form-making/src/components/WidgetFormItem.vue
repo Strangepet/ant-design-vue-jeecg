@@ -4,6 +4,7 @@
       v-if="element && element.key"
       :class="{active: selectWidget.key == element.key, 'is_req': element.options.required}"
       :label="element.name"
+      :style="getStyleArr(element.cssSelectValue1)"
       @click.native.stop="handleSelectWidget(index)"
     >
         <template v-if="element.type == 'input'">
@@ -190,7 +191,8 @@
         </template>
 
         <template v-if="element.type == 'text'">
-          <span :style="widgetcssSelectValue">{{element.options.defaultValue}}</span>
+          <!-- <span :style="widgetcssSelectValue">{{element.options.defaultValue}}</span> -->
+          <span>{{element.options.defaultValue}}</span>
         </template>
 
         <div class="widget-view-action" v-if="selectWidget.key == element.key">
@@ -219,20 +221,17 @@ export default {
       widgetcssSelectValue:'',//文本组件的样式变量
     }
   },
-  created(){
-    bus.$on('transWidgetCssValue',val=>{
-      this.widgetcssSelectValue=''
-      for(let item in val){
-        this.widgetcssSelectValue=this.widgetcssSelectValue+';'+val[item]
-      }
-      console.log('字段接收到的val',val)
-      console.log('字段关联的样式',this.widgetcssSelectValue)
-    })
-  },
   mounted () {
 
   },
   methods: {
+    getStyleArr(val){
+      let styleStr=''
+      for (let item in val){
+        styleStr=styleStr+';'+val[item]
+      }
+      return styleStr
+    },
     handleSelectWidget (index) {
       this.selectWidget = this.data.list[index]
     },
