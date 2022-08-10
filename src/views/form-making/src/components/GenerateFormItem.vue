@@ -1,5 +1,5 @@
 <template>
-  <el-form-item :label="widget.name" :prop="widget.model">
+  <el-form-item :label="widget.name" :prop="widget.model" :style="getStyleArr(widget.cssSelectValue1)">
     <template v-if="widget.type == 'input'" >
       <el-input
         v-if="widget.options.dataType == 'number' || widget.options.dataType == 'integer' || widget.options.dataType == 'float'"
@@ -13,7 +13,7 @@
         v-else
         type="text"
         v-model="dataModel"
-        :disabled="widget.options.disabled"
+        :disabled="widgest.options.disabled"
         :placeholder="widget.options.placeholder"
         :style="{width: widget.options.width}"
         :maxlength="widget.options.maxlength"
@@ -242,6 +242,13 @@ export default {
     }
   },
   methods: {
+    getStyleArr(val){
+      let styleStr=''
+      for (let item in val){
+        styleStr=styleStr+';'+val[item]
+      }
+      return styleStr
+    },
   },
   watch: {
     dataModel: {
