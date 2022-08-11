@@ -2,7 +2,7 @@
   <div class="widget-form-container">
     <div v-if="data.list.length == 0" class="form-empty">{{$t('fm.description.containerEmpty')}}</div>
     <!-- 表单自定义样式class加在这个位置 -->
-    <el-form class='qiqi' :style="cssArr" :size="data.config.size" label-suffix=":" :label-position="data.config.labelPosition" :label-width="data.config.labelWidth + 'px'">
+    <el-form class='qiqi' :style="getStyleArr(data.config.cssFormStyle)" :size="data.config.size" label-suffix=":" :label-position="data.config.labelPosition" :label-width="data.config.labelWidth + 'px'">
       
       <draggable class="" 
         v-model="data.list" 
@@ -81,20 +81,20 @@ export default {
     return {
       selectWidget: this.select,
       //存储类的变量
-      cssArr:''
+      // cssArr:''
     }
   },
   //接收兄弟组件formconfig传来的数据
-  created(){
-    bus.$on('transCssValue',val=>{
-      // console.log('表单接收到传来的数据',val)
-      this.cssArr=''
-      for(let item in val){
-        this.cssArr=this.cssArr+';'+val[item]
-      }
-      // console.log('拼接后表单接收到传来的数据',this.cssArr)
-    })
-  },
+  // created(){
+  //   bus.$on('transCssValue',val=>{
+  //     // console.log('表单接收到传来的数据',val)
+  //     this.cssArr=''
+  //     for(let item in val){
+  //       this.cssArr=this.cssArr+';'+val[item]
+  //     }
+  //     // console.log('拼接后表单接收到传来的数据',this.cssArr)
+  //   })
+  // },
   mounted () {
     document.body.ondrop = function (event) {
       let isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
@@ -105,6 +105,13 @@ export default {
     }
   },
   methods: {
+    getStyleArr(val){
+      let styleStr=''
+      for (let item in val){
+        styleStr=styleStr+';'+val[item]
+      }
+      return styleStr
+    },
     handleMoveEnd ({newIndex, oldIndex}) {
       console.log('index', newIndex, oldIndex)
     },

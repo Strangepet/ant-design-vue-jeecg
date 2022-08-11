@@ -107,7 +107,7 @@
             width="1000px"
             form
           >
-            <generate-form :style="cssArr" insite="true" @on-change="handleDataChange" v-if="previewVisible" :data="widgetForm" :value="widgetModels" :remote="remoteFuncs" ref="generateForm">
+            <generate-form :style="getStyleArr(widgetForm.config.cssFormStyle)" insite="true" @on-change="handleDataChange" v-if="previewVisible" :data="widgetForm" :value="widgetModels" :remote="remoteFuncs" ref="generateForm">
 
               <template v-slot:blank="scope">
                 Width <el-input v-model="scope.model.blank.width" style="width: 100px"></el-input>
@@ -306,6 +306,13 @@ export default {
     this._loadComponents()
   },
   methods: {
+    getStyleArr(val){
+      let styleStr=''
+      for (let item in val){
+        styleStr=styleStr+';'+val[item]
+      }
+      return styleStr
+    },
     _loadComponents () {
       this.basicComponents = this.basicComponents.map(item => {
         return {

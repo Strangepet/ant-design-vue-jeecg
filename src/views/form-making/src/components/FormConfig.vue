@@ -51,7 +51,7 @@
       </el-form-item>
 
       <el-form-item :label="'自定义class'" >
-          <el-select v-model="cssSelectValue" multiple placeholder="请选择" style="width:100%" @change="transCss">
+          <el-select v-model="data.cssFormStyle" multiple placeholder="请选择" style="width:100%">
             <el-option
               v-for="item in classOptions"
               :key="item.cssClassName"
@@ -79,7 +79,7 @@ export default {
       // cssTextarea:'',
       cssTextarea:'.testcss1{color:red;background:pink} .testcss2{color:yellow}.blue{color:blue}.orange{color:orange}',
       classOptions: [],
-      cssSelectValue: []//被选中的下拉框数组
+      // cssSelectValue: []//被选中的下拉框数组
     }
   },
    methods: {
@@ -143,11 +143,11 @@ export default {
       },
 
       //下拉框选项更改时把数据传输给widgetform组件
-      transCss(){
-      // 把下拉框的cssSelectValue变量通过transCssValue这个自定义事件共享给兄弟组件widgetform
-        bus.$emit('transCssValue',this.cssSelectValue)
-        bus.$emit('transCssValue2',this.cssSelectValue)
-      }
+      // transCss(){
+      // // 把下拉框的cssSelectValue变量通过transCssValue这个自定义事件共享给兄弟组件widgetform
+      //   bus.$emit('transCssValue',this.cssSelectValue)
+      //   bus.$emit('transCssValue2',this.cssSelectValue)
+      // }
 
     }
 }
